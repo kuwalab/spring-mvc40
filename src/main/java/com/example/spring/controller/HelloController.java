@@ -5,6 +5,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
 public class HelloController {
@@ -47,5 +48,21 @@ public class HelloController {
 		model.addAttribute("foo", foo);
 		model.addAttribute("bar", bar);
 		return "hello/multiparam";
+	}
+
+	@RequestMapping(value = "/getparam")
+	public String getparam(@RequestParam String foo, @RequestParam String bar,
+			Model model) {
+		model.addAttribute("foo", foo);
+		model.addAttribute("bar", bar);
+		return "hello/getparam";
+	}
+
+	@RequestMapping(value = "/getparam2")
+	public String getparam2(@RequestParam("var1") String foo,
+			@RequestParam("var2") String bar, Model model) {
+		model.addAttribute("foo", foo);
+		model.addAttribute("bar", bar);
+		return "hello/getparam";
 	}
 }
