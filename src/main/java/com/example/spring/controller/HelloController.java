@@ -24,4 +24,28 @@ public class HelloController {
 		model.addAttribute("var", var1);
 		return "hello/urlparam";
 	}
+
+	@RequestMapping(value = "/urlparam/{foo}/{bar}", method = RequestMethod.GET)
+	public String urlparam3(@PathVariable String foo, @PathVariable String bar,
+			Model model) {
+		model.addAttribute("foo", foo);
+		model.addAttribute("bar", bar);
+		return "hello/multiparam";
+	}
+
+	@RequestMapping(value = "/urlparam2/{foo}/{bar}", method = RequestMethod.GET)
+	public String urlparam4(@PathVariable("bar") String var1,
+			@PathVariable("foo") String var2, Model model) {
+		model.addAttribute("foo", var1);
+		model.addAttribute("bar", var2);
+		return "hello/multiparam";
+	}
+
+	@RequestMapping(value = "/urlparam2/{foo}/param/{bar}", method = RequestMethod.GET)
+	public String urlparam5(@PathVariable String foo, @PathVariable String bar,
+			Model model) {
+		model.addAttribute("foo", foo);
+		model.addAttribute("bar", bar);
+		return "hello/multiparam";
+	}
 }
