@@ -1,5 +1,7 @@
 package com.example.spring.controller;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -7,6 +9,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.context.request.NativeWebRequest;
+import org.springframework.web.context.request.WebRequest;
 
 @Controller
 public class HelloController {
@@ -76,5 +80,23 @@ public class HelloController {
 	public String bodyparam(@RequestBody String body, Model model) {
 		model.addAttribute("body", body);
 		return "hello/bodyparam";
+	}
+
+	@RequestMapping("normal")
+	public String normal(HttpServletRequest request, Model model) {
+		model.addAttribute("var", request.getParameter("var"));
+		return "hello/urlparam";
+	}
+
+	@RequestMapping("webrequest")
+	public String webrequest(WebRequest webRequest, Model model) {
+		model.addAttribute("var", webRequest.getParameter("var"));
+		return "hello/urlparam";
+	}
+
+	@RequestMapping("nativeweb")
+	public String nativeweb(NativeWebRequest nativeWebRequest, Model model) {
+		model.addAttribute("var", nativeWebRequest.getParameter("var"));
+		return "hello/urlparam";
 	}
 }
