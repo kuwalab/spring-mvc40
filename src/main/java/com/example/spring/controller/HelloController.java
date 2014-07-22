@@ -1,5 +1,8 @@
 package com.example.spring.controller;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.stereotype.Controller;
@@ -98,5 +101,16 @@ public class HelloController {
 	public String nativeweb(NativeWebRequest nativeWebRequest, Model model) {
 		model.addAttribute("var", nativeWebRequest.getParameter("var"));
 		return "hello/urlparam";
+	}
+
+	@RequestMapping(value = "initreader", method = RequestMethod.GET)
+	public String initreader() {
+		return "hello/initreader";
+	}
+
+	@RequestMapping(value = "reader", method = RequestMethod.POST)
+	public String reader(BufferedReader reader, Model model) throws IOException {
+		model.addAttribute("reader", reader.readLine());
+		return "hello/reader";
 	}
 }
