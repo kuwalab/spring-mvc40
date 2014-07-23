@@ -5,6 +5,7 @@ import java.io.IOException;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.springframework.http.HttpEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -112,5 +113,17 @@ public class HelloController {
 	public String reader(BufferedReader reader, Model model) throws IOException {
 		model.addAttribute("reader", reader.readLine());
 		return "hello/reader";
+	}
+
+	@RequestMapping(value = "initentity", method = RequestMethod.GET)
+	public String initentity() {
+		return "hello/initentity";
+	}
+
+	@RequestMapping(value = "entity")
+	public String entity(HttpEntity<String> httpEntity, Model model)
+			throws IOException {
+		model.addAttribute("entity", httpEntity.getBody());
+		return "hello/entity";
 	}
 }
