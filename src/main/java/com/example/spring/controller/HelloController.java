@@ -126,4 +126,10 @@ public class HelloController {
 		model.addAttribute("entity", httpEntity.getBody());
 		return "hello/entity";
 	}
+
+	@RequestMapping(value = "model", method = RequestMethod.GET)
+	public String model(Customer customer, Model model) {
+		model.addAttribute("customer", customer);
+		return "hello/model";
+	}
 }
