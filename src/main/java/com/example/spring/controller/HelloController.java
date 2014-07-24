@@ -8,6 +8,8 @@ import javax.servlet.http.HttpServletRequest;
 import org.springframework.http.HttpEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -128,8 +130,14 @@ public class HelloController {
 	}
 
 	@RequestMapping(value = "model", method = RequestMethod.GET)
-	public String model(Customer customer, Model model) {
+	public String model(Customer customer, BindingResult errors, Model model) {
+		for (FieldError fe : errors.getFieldErrors()) {
+			System.out.println(fe.getField());
+			System.out.println(fe.getCode());
+			System.out.println(fe.getDefaultMessage());
+		}
 		model.addAttribute("customer", customer);
 		return "hello/model";
 	}
+
 }

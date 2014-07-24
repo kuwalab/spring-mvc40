@@ -11,4 +11,9 @@ http://www.springframework.org/schema/context/spring-context-4.0.xsd">
   <property name="prefix" value="/WEB-INF/jsp/" />
   <property name="suffix" value=".jsp" />
  </bean>
-</beans>
+ <!--
+ <bean id="messageSource"
+  class="org.springframework.context.support.ReloadableResourceBundleMessageSource">
+  <property name="basename" value="classpath:/messages" />
+ </bean>
+ --></beans>
