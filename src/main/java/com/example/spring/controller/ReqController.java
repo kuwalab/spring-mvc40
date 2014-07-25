@@ -5,6 +5,7 @@ import java.io.IOException;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.springframework.http.HttpEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -98,5 +99,16 @@ public class ReqController {
 			throws IOException {
 		model.addAttribute("body", reader.readLine());
 		return "req/readerRecv";
+	}
+
+	@RequestMapping("/entityForm")
+	public String entityForm() {
+		return "req/entityForm";
+	}
+
+	@RequestMapping(value = "/entityRecv", method = RequestMethod.POST)
+	public String entityRecv(HttpEntity<String> httpEntity, Model model) {
+		model.addAttribute("body", httpEntity.getBody());
+		return "req/entityRecv";
 	}
 }
