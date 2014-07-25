@@ -1,9 +1,11 @@
 package com.example.spring.controller;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
 public class ReqController {
@@ -31,5 +33,21 @@ public class ReqController {
 	@RequestMapping(value = "/pathVar5/{foo}/param/{bar}", method = RequestMethod.GET)
 	public String pathVar5(@PathVariable String foo, @PathVariable String bar) {
 		return "req/pathVar3";
+	}
+
+	@RequestMapping(value = "/getParam")
+	public String getParam(@RequestParam String foo, @RequestParam String bar,
+			Model model) {
+		model.addAttribute("modelFoo", foo);
+		model.addAttribute("modelBar", bar);
+		return "req/getParam";
+	}
+
+	@RequestMapping(value = "/getParam2")
+	public String getparam2(@RequestParam("foo1") String foo,
+			@RequestParam("bar1") String bar, Model model) {
+		model.addAttribute("modelFoo", foo);
+		model.addAttribute("modelBar", bar);
+		return "req/getParam";
 	}
 }
