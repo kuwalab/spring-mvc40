@@ -1,5 +1,7 @@
 package com.example.spring.controller;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -7,6 +9,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.context.request.NativeWebRequest;
+import org.springframework.web.context.request.WebRequest;
 
 @Controller
 public class ReqController {
@@ -61,5 +65,23 @@ public class ReqController {
 	public String bodyRecv(@RequestBody String body, Model model) {
 		model.addAttribute("body", body);
 		return "req/bodyRecv";
+	}
+
+	@RequestMapping("/req")
+	public String req(HttpServletRequest request, Model model) {
+		model.addAttribute("foo", request.getParameter("foo"));
+		return "req/req";
+	}
+
+	@RequestMapping("/req2")
+	public String req2(WebRequest request, Model model) {
+		model.addAttribute("foo", request.getParameter("foo"));
+		return "req/req";
+	}
+
+	@RequestMapping("/req3")
+	public String req3(NativeWebRequest request, Model model) {
+		model.addAttribute("foo", request.getParameter("foo"));
+		return "req/req";
 	}
 }
