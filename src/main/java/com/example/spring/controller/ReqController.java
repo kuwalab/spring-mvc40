@@ -16,4 +16,20 @@ public class ReqController {
 	public String pathVar2(@PathVariable("var1") String var) {
 		return "req/pathVar";
 	}
+
+	@RequestMapping(value = "/pathVar3/{foo}/{bar}", method = RequestMethod.GET)
+	public String pathVar3(@PathVariable String foo, @PathVariable String bar) {
+		return "req/pathVar3";
+	}
+
+	@RequestMapping(value = "/pathVar4/{bar1}/{foo1}", method = RequestMethod.GET)
+	public String pathVar4(@PathVariable("bar1") String bar,
+			@PathVariable("foo1") String foo) {
+		return "req/pathVar3";
+	}
+
+	@RequestMapping(value = "/pathVar5/{foo}/param/{bar}", method = RequestMethod.GET)
+	public String pathVar5(@PathVariable String foo, @PathVariable String bar) {
+		return "req/pathVar3";
+	}
 }
