@@ -1,5 +1,8 @@
 package com.example.spring.controller;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.stereotype.Controller;
@@ -83,5 +86,17 @@ public class ReqController {
 	public String req3(NativeWebRequest request, Model model) {
 		model.addAttribute("foo", request.getParameter("foo"));
 		return "req/req";
+	}
+
+	@RequestMapping("/readerForm")
+	public String readerForm() {
+		return "req/readerForm";
+	}
+
+	@RequestMapping(value = "/readerRecv", method = RequestMethod.POST)
+	public String readerRecv(BufferedReader reader, Model model)
+			throws IOException {
+		model.addAttribute("body", reader.readLine());
+		return "req/readerRecv";
 	}
 }
