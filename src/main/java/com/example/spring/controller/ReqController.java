@@ -3,6 +3,7 @@ package com.example.spring.controller;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -49,5 +50,16 @@ public class ReqController {
 		model.addAttribute("modelFoo", foo);
 		model.addAttribute("modelBar", bar);
 		return "req/getParam";
+	}
+
+	@RequestMapping("/bodyForm")
+	public String bodyForm() {
+		return "req/bodyForm";
+	}
+
+	@RequestMapping(value = "/bodyRecv", method = RequestMethod.POST)
+	public String bodyRecv(@RequestBody String body, Model model) {
+		model.addAttribute("body", body);
+		return "req/bodyRecv";
 	}
 }
