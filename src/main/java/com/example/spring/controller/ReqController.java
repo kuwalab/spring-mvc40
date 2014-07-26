@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServletRequest;
 import org.springframework.http.HttpEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -110,5 +111,15 @@ public class ReqController {
 	public String entityRecv(HttpEntity<String> httpEntity, Model model) {
 		model.addAttribute("body", httpEntity.getBody());
 		return "req/entityRecv";
+	}
+
+	@RequestMapping("/modelForm")
+	public String modelForm() {
+		return "req/modelForm";
+	}
+
+	@RequestMapping(value = "/modelRecv", method = RequestMethod.POST)
+	public String modelRecv(@ModelAttribute Customer customer) {
+		return "req/modelRecv";
 	}
 }
