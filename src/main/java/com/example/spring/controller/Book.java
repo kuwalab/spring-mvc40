@@ -1,7 +1,11 @@
 package com.example.spring.controller;
 
+import javax.validation.constraints.NotNull;
+
 public class Book {
+	@NotNull
 	private String name;
+	@NotNull
 	private Integer price;
 
 	public String getName() {
