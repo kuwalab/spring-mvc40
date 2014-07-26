@@ -4,7 +4,7 @@
  <head>
   <meta charset="utf-8">
   <title>サンプル</title>
- </head>z
+ </head>
  <body>
 fooの値は <c:out value="${foo}" /><br>
 barの値は <c:out value="${bar}" /><br>
