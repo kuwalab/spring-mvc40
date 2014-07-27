@@ -1,11 +1,11 @@
 package com.example.spring.controller;
 
 import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Pattern;
+
+import org.hibernate.validator.constraints.NotBlank;
 
 public class Book {
-	@NotNull
-	@Pattern(regexp = "ISBN[0-9]{10}", message = "{0}はISBNを入力してください")
+	@NotBlank
 	private String name;
 	@NotNull
 	private Integer price;
