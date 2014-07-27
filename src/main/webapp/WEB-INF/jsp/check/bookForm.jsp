@@ -8,7 +8,7 @@
  <body>
   <form action="bookRecv" method="post">
    書名: <input type="text" name="name" size="20"><form:errors path="book.name" /><br>
-   価格: <input type="text" name="age" size="20"><form:errors path="book.price" /><br>
+   価格: <input type="text" name="price" size="20"><form:errors path="book.price" /><br>
    <input type="submit" value="送信">
   </form>
  </body>
