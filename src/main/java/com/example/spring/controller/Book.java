@@ -1,14 +1,14 @@
 package com.example.spring.controller;
 
-import javax.validation.constraints.Digits;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
 public class Book {
 	@NotNull
+	@Size(min = 10, max = 10)
 	private String name;
 	@NotNull
-	@Digits(integer = 3, fraction = 2)
-	private Double price;
+	private Integer price;
 
 	public String getName() {
 		return name;
@@ -18,11 +18,11 @@ public class Book {
 		this.name = name;
 	}
 
-	public Double getPrice() {
+	public Integer getPrice() {
 		return price;
 	}
 
-	public void setPrice(Double price) {
+	public void setPrice(Integer price) {
 		this.price = price;
 	}
 }
