@@ -8,9 +8,9 @@
  <body>
   <form:errors path="*" />
   <form action="bookRecv" method="post">
-   書名: <input type="text" name="name" size="20"><form:errors path="book.name" /><br>
-   価格: <input type="text" name="price" size="20"><form:errors path="book.price" /><form:errors path="book.validPrice" /><br>
-   定価: <input type="text" name="listPrice" size="20"><form:errors path="book.listPrice" /><br>
+   書名: <form:input path="book.name" size="20" /><form:errors path="book.name" /><br>
+   価格: <form:input path="book.price" size="20" /><form:errors path="book.price" /><form:errors path="book.validPrice" /><br>
+   定価: <form:input path="book.listPrice" size="20" /><form:errors path="book.listPrice" /><br>
    <input type="submit" value="送信">
   </form>
  </body>
