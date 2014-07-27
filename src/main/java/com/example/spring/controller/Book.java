@@ -1,11 +1,11 @@
 package com.example.spring.controller;
 
 import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
+import javax.validation.constraints.Pattern;
 
 public class Book {
 	@NotNull
-	@Size(min = 10, max = 10)
+	@Pattern(regexp = "ISBN[0-9]{10}", message = "{0}はISBNを入力してください")
 	private String name;
 	@NotNull
 	private Integer price;
