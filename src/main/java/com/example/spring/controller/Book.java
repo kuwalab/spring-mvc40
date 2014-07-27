@@ -1,16 +1,14 @@
 package com.example.spring.controller;
 
-import javax.validation.constraints.Max;
-import javax.validation.constraints.Min;
+import javax.validation.constraints.Digits;
 import javax.validation.constraints.NotNull;
 
 public class Book {
 	@NotNull
 	private String name;
 	@NotNull
-	@Min(1)
-	@Max(100000)
-	private Integer price;
+	@Digits(integer = 3, fraction = 2)
+	private Double price;
 
 	public String getName() {
 		return name;
@@ -20,11 +18,11 @@ public class Book {
 		this.name = name;
 	}
 
-	public Integer getPrice() {
+	public Double getPrice() {
 		return price;
 	}
 
-	public void setPrice(Integer price) {
+	public void setPrice(Double price) {
 		this.price = price;
 	}
 }
