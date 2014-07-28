@@ -122,4 +122,29 @@ public class ReqController {
 	public String modelRecv(@ModelAttribute Customer customer) {
 		return "req/modelRecv";
 	}
+
+	@RequestMapping("/branchForm")
+	public String branchForm() {
+		return "req/branchForm";
+	}
+
+	@RequestMapping(value = "/branchRecv", params = "branch1", method = RequestMethod.POST)
+	public String branch1() {
+		return "req/branch1";
+	}
+
+	@RequestMapping(value = "/branchRecv", params = "branch2", method = RequestMethod.POST)
+	public String branch2() {
+		return "req/branch2";
+	}
+
+	@RequestMapping(value = "/branchRecv", params = "branch3", method = RequestMethod.POST)
+	public String branch3() {
+		return "req/branch3";
+	}
+
+	@RequestMapping(value = "/branchRecv", params = "branch4", method = RequestMethod.POST)
+	public String branch4() {
+		return "req/branch4";
+	}
 }
