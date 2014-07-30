@@ -6,6 +6,7 @@
   <title>サンプル</title>
  </head>
  <body>
-  <a href="csvDown">csvDown</a>
+  <a href="csvDown">csvDown</a><br>
+  <a href="csvDown2">csvDown2</a>
  </body>
 </html>
