@@ -12,6 +12,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.util.MimeTypeUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 @Controller
 public class ResController {
@@ -34,7 +35,7 @@ public class ResController {
 		}
 	}
 
-	@RequestMapping(value = "/csvDown2", method = { RequestMethod.GET }, produces = "application/octet-stream;charset=utf-8")
+	@RequestMapping(value = "/csvDown2", method = RequestMethod.GET, produces = "application/octet-stream;charset=utf-8")
 	public ResponseEntity<String> csvDown2() {
 		HttpHeaders headers = new HttpHeaders();
 		// headers.setContentType(MediaType.APPLICATION_OCTET_STREAM);
@@ -45,6 +46,18 @@ public class ResController {
 		csvData = csvData + "田中　花子,29";
 
 		return new ResponseEntity<String>(csvData, headers, HttpStatus.OK);
+	}
+
+	@RequestMapping(value = "/csvDown3", method = RequestMethod.GET, produces = MimeTypeUtils.APPLICATION_OCTET_STREAM_VALUE
+			+ ";charset=utf-8")
+	@ResponseBody
+	public String csvDown3(HttpServletResponse response) {
+		response.setHeader("Content-Disposition",
+				"attachment; filename=\"test3.csv\"");
+
+		String csvData = "山田　太郎,33\r\n";
+		csvData = csvData + "田中　花子,29";
+		return csvData;
 	}
 
 }
