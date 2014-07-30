@@ -35,7 +35,7 @@ public class ResController {
 	}
 
 	@RequestMapping(value = "/csvDown2", method = { RequestMethod.GET }, produces = "application/octet-stream;charset=utf-8")
-	public ResponseEntity<String> csvDown2() throws IOException {
+	public ResponseEntity<String> csvDown2() {
 		HttpHeaders headers = new HttpHeaders();
 		// headers.setContentType(MediaType.APPLICATION_OCTET_STREAM);
 		headers.add("contet-type", MimeTypeUtils.APPLICATION_OCTET_STREAM_VALUE
@@ -46,4 +46,5 @@ public class ResController {
 
 		return new ResponseEntity<String>(csvData, headers, HttpStatus.OK);
 	}
+
 }
