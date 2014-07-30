@@ -23,4 +23,7 @@ http://www.springframework.org/schema/mvc/spring-mvc-4.0.xsd">
   class="org.springframework.validation.beanvalidation.LocalValidatorFactoryBean">
   <property name="validationMessageSource" ref="messageSource" />
  </bean>
+ <bean id="multipartResolver"
+  class="org.springframework.web.multipart.support.StandardServletMultipartResolver">
+ </bean>
 </beans>
