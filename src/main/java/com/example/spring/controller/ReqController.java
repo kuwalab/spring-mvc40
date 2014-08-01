@@ -14,7 +14,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RequestPart;
 import org.springframework.web.context.request.NativeWebRequest;
 import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.multipart.MultipartFile;
@@ -156,8 +155,8 @@ public class ReqController {
 	}
 
 	@RequestMapping(value = "/uploadRecv", method = RequestMethod.POST)
-	public String uploadRecv(@RequestPart String test,
-			@RequestPart MultipartFile file, Model model) {
+	public String uploadRecv(@RequestParam String test,
+			@RequestParam MultipartFile file, Model model) {
 		model.addAttribute("test", test);
 		model.addAttribute("fileName", file.getOriginalFilename());
 		return "req/uploadRecv";
