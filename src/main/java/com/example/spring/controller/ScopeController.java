@@ -1,6 +1,7 @@
 package com.example.spring.controller;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -28,5 +29,25 @@ public class ScopeController {
 	@RequestMapping("/requestScope3")
 	public String requestScope3() {
 		return "scope/requestScope3";
+	}
+
+	@RequestMapping("/sessionScope1")
+	public String sessionScope1(HttpSession session, WebRequest webRequest) {
+		session.setAttribute("session1", "httpSession");
+		webRequest.setAttribute("session2", "webRequest",
+				WebRequest.SCOPE_SESSION);
+
+		return "scope/sessionScope1";
+	}
+
+	@RequestMapping("/sessionScope2")
+	public String sessionScope2() {
+		return "scope/sessionScope1";
+	}
+
+	@RequestMapping("/sessionScope3")
+	public String sessionScope3(HttpSession session) {
+		session.invalidate();
+		return "scope/sessionScope1";
 	}
 }
