@@ -6,6 +6,7 @@
   <title>サンプル</title>
  </head>
  <body>
+  <c:out value="${errorMessage}" />
   <form action="uploadRecv" method="post" enctype="multipart/form-data">
    <input type="text" name="test"><br>
    <input type="file" name="file"><br>
