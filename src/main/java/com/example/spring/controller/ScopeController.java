@@ -17,4 +17,16 @@ public class ScopeController {
 		model.addAttribute("req3", "model");
 		return "scope/requestScope1";
 	}
+
+	@RequestMapping("/requestScope2")
+	public String requestScope2(RequestBook requestBook) {
+		requestBook.setName("よくわかるSpring");
+		requestBook.setPrice(2900);
+		return "scope/requestScope2";
+	}
+
+	@RequestMapping("/requestScope3")
+	public String requestScope3() {
+		return "scope/requestScope3";
+	}
 }
