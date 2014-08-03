@@ -2,12 +2,6 @@ package com.example.spring.controller;
 
 import java.io.Serializable;
 
-import org.springframework.context.annotation.Scope;
-import org.springframework.stereotype.Component;
-import org.springframework.web.context.WebApplicationContext;
-
-@Component
-@Scope(WebApplicationContext.SCOPE_SESSION)
 public class SessionBook implements Serializable {
 	private String name;
 	private Integer price;
