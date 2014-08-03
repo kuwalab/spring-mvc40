@@ -7,6 +7,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.context.request.WebRequest;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 @Controller
 public class ScopeController {
@@ -73,5 +74,18 @@ public class ScopeController {
 	public String sessionScope6(HttpSession session) {
 		session.invalidate();
 		return "scope/sessionScope4";
+	}
+
+	@RequestMapping("/flashScope1")
+	public String flashScope1(RedirectAttributes attrs, Model model) {
+		attrs.addFlashAttribute("flash1", "flash1");
+		model.addAttribute("request1", "request1");
+
+		return "redirect:/flashScope2";
+	}
+
+	@RequestMapping("/flashScope2")
+	public String flashScope2() {
+		return "scope/flashScope1";
 	}
 }
