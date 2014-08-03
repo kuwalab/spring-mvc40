@@ -3,6 +3,7 @@ package com.example.spring.controller;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -49,5 +50,32 @@ public class ScopeController {
 	public String sessionScope3(HttpSession session) {
 		session.invalidate();
 		return "scope/sessionScope1";
+	}
+
+	@Autowired
+	private SessionBook sessionBook;
+
+	@RequestMapping("/sessionStart")
+	public String sessionStart(HttpServletRequest request) {
+		request.getSession();
+		return "scope/sessionStart";
+	}
+
+	@RequestMapping("/sessionScope4")
+	public String sessionScope4() {
+		sessionBook.setName("よくわかるHttpSession");
+		sessionBook.setPrice(980);
+		return "scope/sessionScope4";
+	}
+
+	@RequestMapping("/sessionScope5")
+	public String sessionScope5() {
+		return "scope/sessionScope4";
+	}
+
+	@RequestMapping("/sessionScope6")
+	public String sessionScope6(HttpSession session) {
+		session.invalidate();
+		return "scope/sessionScope4";
 	}
 }
