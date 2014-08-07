@@ -2,6 +2,8 @@ package com.example.spring.controller;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.servlet.http.HttpServletResponse;
 
@@ -9,6 +11,7 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.util.MimeTypeUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -60,4 +63,21 @@ public class ResController {
 		return csvData;
 	}
 
+	@RequestMapping("/csvDown4")
+	public String csvDown4(Model model) {
+		List<Book> bookList = new ArrayList<>();
+
+		Book book = new Book();
+		book.setName("よくわかるSpring");
+		book.setPrice(3000);
+		bookList.add(book);
+
+		book = new Book();
+		book.setName("よくわかるJava");
+		book.setPrice(2980);
+		bookList.add(book);
+
+		model.addAttribute("bookList", bookList);
+		return "csvDownload";
+	}
 }

@@ -15,6 +15,10 @@ http://www.springframework.org/schema/mvc/spring-mvc-4.0.xsd">
   <property name="prefix" value="/WEB-INF/jsp/" />
   <property name="suffix" value=".jsp" />
  </bean>
+ <bean id="xmlViewResolver" class="org.springframework.web.servlet.view.XmlViewResolver">
+  <property name="order" value="1" />
+  <property name="location" value="/WEB-INF/spring/views.xml" />
+ </bean>
  <bean id="messageSource"
   class="org.springframework.context.support.ReloadableResourceBundleMessageSource">
   <property name="basename" value="classpath:/messages" />
@@ -26,5 +30,5 @@ http://www.springframework.org/schema/mvc/spring-mvc-4.0.xsd">
  <bean id="multipartResolver"
   class="org.springframework.web.multipart.support.StandardServletMultipartResolver">
  </bean>
- <bean class="com.example.spring.GlobalExceptionResolver"/>
+ <bean class="com.example.spring.GlobalExceptionResolver" />
 </beans>
