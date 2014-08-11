@@ -13,6 +13,16 @@ public class Book {
 	@NotNull
 	private Integer listPrice;
 
+	public Book() {
+	}
+
+	public Book(String name, Integer price, Integer listPrice) {
+		super();
+		this.name = name;
+		this.price = price;
+		this.listPrice = listPrice;
+	}
+
 	@AssertTrue(message = "{valid.price}")
 	public boolean isValidPrice() {
 		if (price == null || listPrice == null) {
