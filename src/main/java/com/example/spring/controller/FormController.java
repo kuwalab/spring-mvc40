@@ -12,4 +12,12 @@ public class FormController {
 		model.addAttribute("book", book);
 		return "form/input";
 	}
+
+	@RequestMapping("/form/password")
+	public String password(Model model) {
+		FormPassword formPassword = new FormPassword();
+		formPassword.setPassword("password");
+		model.addAttribute("formPassword", formPassword);
+		return "form/password";
+	}
 }
