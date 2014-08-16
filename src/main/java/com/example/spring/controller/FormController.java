@@ -20,4 +20,11 @@ public class FormController {
 		model.addAttribute("formPassword", formPassword);
 		return "form/password";
 	}
+
+	@RequestMapping("/form/hidden")
+	public String hidden(Model model) {
+		Book book = new Book("よく分かるSpring<&>", 2000, 2500);
+		model.addAttribute("book", book);
+		return "form/hidden";
+	}
 }
