@@ -27,4 +27,18 @@ public class FormController {
 		model.addAttribute("book", book);
 		return "form/hidden";
 	}
+
+	@RequestMapping("/form/checkbox")
+	public String checkbox(Model model) {
+		FormCheckbox formCheckbox = new FormCheckbox();
+		formCheckbox.setCheck(true);
+		model.addAttribute("formCheckbox", formCheckbox);
+		return "form/checkbox";
+	}
+
+	@RequestMapping("/form/checkboxRecv")
+	public String checkboxRecv(String check, Model model) {
+		model.addAttribute("recvData", check);
+		return "form/checkboxRecv";
+	}
 }
