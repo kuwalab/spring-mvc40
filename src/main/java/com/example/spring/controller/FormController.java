@@ -1,8 +1,12 @@
 package com.example.spring.controller;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
 public class FormController {
@@ -40,5 +44,28 @@ public class FormController {
 	public String checkboxRecv(String check, Model model) {
 		model.addAttribute("recvData", check);
 		return "form/checkboxRecv";
+	}
+
+	@RequestMapping("/form/checkboxes")
+	public String checkboxes(Model model) {
+		List<Book> bookList = new ArrayList<>();
+
+		bookList.add(new Book("123", "よく分かるSpring"));
+		bookList.add(new Book("456", "よく分かるJava"));
+		bookList.add(new Book("789", "よく分かるSpring MVC"));
+
+		model.addAttribute("bookList", bookList);
+
+		BookForm bookForm = new BookForm();
+		bookForm.setSelectedIsbn(new String[] { "456" });
+		model.addAttribute("bookForm", bookForm);
+		return "form/checkboxes";
+	}
+
+	@RequestMapping("/form/checkboxesRecv")
+	public String checkboxesRecv(
+			@RequestParam(required = false) String[] selectedIsbn, Model model) {
+		model.addAttribute("isbns", selectedIsbn);
+		return "form/checkboxesRecv";
 	}
 }

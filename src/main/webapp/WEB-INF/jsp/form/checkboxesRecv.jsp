@@ -6,9 +6,9 @@
   <title>サンプル</title>
  </head>
  <body>
-  <form action="checkboxRecv">
-   <form:checkbox path="formCheckbox.check" label="チェック"/><br>
-   <input type="submit" value="送信">
-  </form>
+  チェックされた項目は<br>
+  <c:forEach items="${isbns}" var="isbn">
+   <c:out value="${isbn}" />
+  </c:forEach>
  </body>
 </html>

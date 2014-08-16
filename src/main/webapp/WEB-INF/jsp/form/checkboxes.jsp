@@ -6,8 +6,8 @@
   <title>サンプル</title>
  </head>
  <body>
-  <form action="checkboxRecv">
-   <form:checkbox path="formCheckbox.check" label="チェック"/><br>
+  <form action="checkboxesRecv">
+   <form:checkboxes path="bookForm.selectedIsbn" items="${bookList}" itemLabel="name" itemValue="isbn" delimiter=" " /><br>
    <input type="submit" value="送信">
   </form>
  </body>

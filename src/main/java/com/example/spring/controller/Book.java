@@ -6,6 +6,7 @@ import javax.validation.constraints.NotNull;
 import org.hibernate.validator.constraints.NotBlank;
 
 public class Book {
+	private String isbn;
 	@NotBlank
 	private String name;
 	@NotNull
@@ -21,6 +22,20 @@ public class Book {
 		this.name = name;
 		this.price = price;
 		this.listPrice = listPrice;
+	}
+
+	public Book(String isbn, String name) {
+		super();
+		this.isbn = isbn;
+		this.name = name;
+	}
+
+	public String getIsbn() {
+		return isbn;
+	}
+
+	public void setIsbn(String isbn) {
+		this.isbn = isbn;
 	}
 
 	@AssertTrue(message = "{valid.price}")
