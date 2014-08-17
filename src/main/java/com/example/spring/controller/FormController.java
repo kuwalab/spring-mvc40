@@ -117,9 +117,18 @@ public class FormController {
 
 		model.addAttribute("bookList", bookList);
 
-		BookForm bookForm = new BookForm();
-		bookForm.setSelectedIsbn(new String[] { "456" });
+		BookForm2 bookForm = new BookForm2();
+		bookForm.setSelectedIsbn("456");
 		model.addAttribute("bookForm", bookForm);
 		return "form/select";
 	}
+
+	@RequestMapping("/form/option")
+	public String option(Model model) {
+		BookForm2 bookForm = new BookForm2();
+		bookForm.setSelectedIsbn("");
+		model.addAttribute("bookForm", bookForm);
+		return "form/option";
+	}
+
 }
