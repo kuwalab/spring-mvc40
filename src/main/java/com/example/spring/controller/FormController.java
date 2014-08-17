@@ -79,9 +79,9 @@ public class FormController {
 	}
 
 	@RequestMapping("/form/radiobuttonRecv")
-	public String radiobuttonRecv(String check, Model model) {
-		model.addAttribute("recvData", check);
-		return "form/checkboxRecv";
+	public String radiobuttonRecv(@RequestParam String tel, Model model) {
+		model.addAttribute("recvData", tel);
+		return "form/radiobuttonRecv";
 	}
 
 }
