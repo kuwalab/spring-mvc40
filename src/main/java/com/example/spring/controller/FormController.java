@@ -131,4 +131,19 @@ public class FormController {
 		return "form/option";
 	}
 
+	@RequestMapping("/form/options")
+	public String options(Model model) {
+		List<Book> bookList = new ArrayList<>();
+
+		bookList.add(new Book("123", "よく分かるSpring"));
+		bookList.add(new Book("456", "よく分かるJava"));
+		bookList.add(new Book("789", "よく分かるSpring MVC"));
+
+		model.addAttribute("bookList", bookList);
+
+		BookForm2 bookForm = new BookForm2();
+		bookForm.setSelectedIsbn("");
+		model.addAttribute("bookForm", bookForm);
+		return "form/options";
+	}
 }
