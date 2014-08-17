@@ -68,4 +68,20 @@ public class FormController {
 		model.addAttribute("isbns", selectedIsbn);
 		return "form/checkboxesRecv";
 	}
+
+	@RequestMapping("/form/radiobutton")
+	public String radiobutton(Model model) {
+		FormRadiobutton formRadiobutton = new FormRadiobutton();
+		formRadiobutton.setTel("mobile");
+
+		model.addAttribute("formRadiobutton", formRadiobutton);
+		return "form/radiobutton";
+	}
+
+	@RequestMapping("/form/radiobuttonRecv")
+	public String radiobuttonRecv(String check, Model model) {
+		model.addAttribute("recvData", check);
+		return "form/checkboxRecv";
+	}
+
 }
