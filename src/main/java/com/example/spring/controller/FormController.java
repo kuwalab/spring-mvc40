@@ -84,4 +84,27 @@ public class FormController {
 		return "form/radiobuttonRecv";
 	}
 
+	@RequestMapping("/form/radiobuttons")
+	public String radiobuttons(Model model) {
+		List<Book> bookList = new ArrayList<>();
+
+		bookList.add(new Book("123", "よく分かるSpring"));
+		bookList.add(new Book("456", "よく分かるJava"));
+		bookList.add(new Book("789", "よく分かるSpring MVC"));
+
+		model.addAttribute("bookList", bookList);
+
+		BookForm2 bookForm = new BookForm2();
+		bookForm.setSelectedIsbn("456");
+		model.addAttribute("bookForm", bookForm);
+		return "form/radiobuttons";
+	}
+
+	@RequestMapping("/form/radiobuttonsRecv")
+	public String radiobuttonsRecv(
+			@RequestParam(required = false) String selectedIsbn, Model model) {
+		model.addAttribute("isbn", selectedIsbn);
+		return "form/radiobuttonsRecv";
+	}
+
 }
