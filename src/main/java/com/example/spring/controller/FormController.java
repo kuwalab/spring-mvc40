@@ -146,4 +146,11 @@ public class FormController {
 		model.addAttribute("bookForm", bookForm);
 		return "form/options";
 	}
+
+	@RequestMapping("/form/label")
+	public String label(Model model) {
+		Book book = new Book("123", "よく分かるSpring");
+		model.addAttribute("book", book);
+		return "form/label";
+	}
 }
