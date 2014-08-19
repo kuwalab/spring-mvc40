@@ -153,4 +153,12 @@ public class FormController {
 		model.addAttribute("book", book);
 		return "form/label";
 	}
+
+	@RequestMapping("/form/textarea")
+	public String textarea(Model model) {
+		Book book = new Book();
+		book.setName("よく分かるSpring\n本当にわかる\nかなりわかり");
+		model.addAttribute("book", book);
+		return "form/textarea";
+	}
 }
