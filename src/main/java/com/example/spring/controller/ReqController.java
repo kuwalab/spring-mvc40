@@ -62,6 +62,14 @@ public class ReqController {
 		return "req/getParam";
 	}
 
+	@RequestMapping("/getParam3")
+	public String getParam3(@RequestParam(required = false) String foo,
+			@RequestParam(defaultValue = "default") String bar, Model model) {
+		model.addAttribute("foo", foo);
+		model.addAttribute("bar", bar);
+		return "req/getParam";
+	}
+
 	@RequestMapping("/bodyForm")
 	public String bodyForm() {
 		return "req/bodyForm";
