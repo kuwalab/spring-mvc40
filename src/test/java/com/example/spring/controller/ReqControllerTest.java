@@ -121,4 +121,28 @@ public class ReqControllerTest {
 				.andExpect(model().attribute("foo", is(nullValue())))
 				.andExpect(model().attribute("bar", is("default")));
 	}
+
+	@Test
+	public void reqのGET() throws Exception {
+		mockMvc.perform(get("/req").param("foo", "foo"))
+				.andExpect(status().isOk()).andExpect(view().name("req/req"))
+				.andExpect(model().hasNoErrors())
+				.andExpect(request().attribute("foo", is("foo")));
+	}
+
+	@Test
+	public void req2のGET() throws Exception {
+		mockMvc.perform(get("/req2").param("foo", "foo"))
+				.andExpect(status().isOk()).andExpect(view().name("req/req"))
+				.andExpect(model().hasNoErrors())
+				.andExpect(request().attribute("foo", is("foo")));
+	}
+
+	@Test
+	public void req3のGET() throws Exception {
+		mockMvc.perform(get("/req3").param("foo", "foo"))
+				.andExpect(status().isOk()).andExpect(view().name("req/req"))
+				.andExpect(model().hasNoErrors())
+				.andExpect(request().attribute("foo", is("foo")));
+	}
 }

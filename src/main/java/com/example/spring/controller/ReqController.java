@@ -157,12 +157,12 @@ public class ReqController {
 		return "req/branch4";
 	}
 
-	@RequestMapping("uploadForm")
+	@RequestMapping("/uploadForm")
 	public String uploadForm() {
 		return "req/uploadForm";
 	}
 
-	@RequestMapping(value = "/uploadRecv", method = RequestMethod.POST)
+	@RequestMapping(value = "uploadRecv", method = RequestMethod.POST)
 	public String uploadRecv(@RequestParam String test,
 			@RequestParam MultipartFile file, Model model) {
 		model.addAttribute("test", test);
