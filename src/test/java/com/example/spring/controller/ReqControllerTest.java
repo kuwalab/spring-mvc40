@@ -44,4 +44,32 @@ public class ReqControllerTest {
 				.andExpect(model().hasNoErrors())
 				.andExpect(request().attribute("var1", is("abcde")));
 	}
+
+	@Test
+	public void pathVar3_123_abcへのGET() throws Exception {
+		mockMvc.perform(get("/pathVar3/123/abc")).andExpect(status().isOk())
+				.andExpect(view().name("req/pathVar3"))
+				.andExpect(model().hasNoErrors())
+				.andExpect(request().attribute("foo", is("123")))
+				.andExpect(request().attribute("bar", is("abc")));
+	}
+
+	@Test
+	public void pathVar4_123_abcへのGET() throws Exception {
+		mockMvc.perform(get("/pathVar4/123/abc")).andExpect(status().isOk())
+				.andExpect(view().name("req/pathVar3"))
+				.andExpect(model().hasNoErrors())
+				.andExpect(request().attribute("bar1", is("123")))
+				.andExpect(request().attribute("foo1", is("abc")));
+	}
+
+	@Test
+	public void pathVar5_123_param_abcへのGET() throws Exception {
+		mockMvc.perform(get("/pathVar5/123/param/abc"))
+				.andExpect(status().isOk())
+				.andExpect(view().name("req/pathVar3"))
+				.andExpect(model().hasNoErrors())
+				.andExpect(request().attribute("foo", is("123")))
+				.andExpect(request().attribute("bar", is("abc")));
+	}
 }
