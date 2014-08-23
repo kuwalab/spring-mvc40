@@ -175,4 +175,21 @@ public class ReqControllerTest {
 		assertThat(customer.getName(), is("abc"));
 		assertThat(customer.getAge(), is("20"));
 	}
+
+	@Test
+	public void requestScope1のGET() throws Exception {
+		MvcResult mvcResult = mockMvc
+				.perform(post("/requestScope1"))
+				.andExpect(status().isOk())
+				.andExpect(view().name("scope/requestScope1"))
+				.andExpect(model().hasNoErrors())
+				.andExpect(
+						request().attribute("req1", is("httpServletRequest")))
+				.andExpect(request().attribute("req2", is("webRequest")))
+				.andExpect(request().attribute("req3", is("model")))
+				.andExpect(model().attributeExists("req3")).andReturn();
+
+		Map<String, Object> model = mvcResult.getModelAndView().getModel();
+		assertThat(model.get("req3"), is("model"));
+	}
 }
