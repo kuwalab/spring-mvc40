@@ -1,9 +1,12 @@
 package com.example.spring.controller;
 
 import static org.hamcrest.CoreMatchers.*;
+import static org.junit.Assert.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 import static org.springframework.test.web.servlet.setup.MockMvcBuilders.*;
+
+import java.util.Map;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -13,6 +16,7 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
 import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.web.context.WebApplicationContext;
 
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -144,5 +148,26 @@ public class ReqControllerTest {
 				.andExpect(status().isOk()).andExpect(view().name("req/req"))
 				.andExpect(model().hasNoErrors())
 				.andExpect(request().attribute("foo", is("foo")));
+	}
+
+	@Test
+	public void modelFormのGET() throws Exception {
+		mockMvc.perform(get("/modelForm")).andExpect(status().isOk())
+				.andExpect(view().name("req/modelForm"))
+				.andExpect(model().hasNoErrors());
+	}
+
+	public void modelRecvのPOST() throws Exception {
+		MvcResult mvcResult = mockMvc
+				.perform(
+						post("/modelRecv").param("name", "abc").param("age",
+								"20")).andExpect(status().isOk())
+				.andExpect(view().name("req/modelRecv"))
+				.andExpect(model().hasNoErrors())
+				.andExpect(model().attributeExists("customer")).andReturn();
+
+		Map<String, Object> model = mvcResult.getModelAndView().getModel();
+		assertThat(model.get("name"), is("abc"));
+		assertThat(model.get("age"), is("20"));
 	}
 }
