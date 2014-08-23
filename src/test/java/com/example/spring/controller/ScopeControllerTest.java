@@ -36,7 +36,7 @@ public class ScopeControllerTest {
 	@Test
 	public void requestScope1のGET() throws Exception {
 		MvcResult mvcResult = mockMvc
-				.perform(post("/requestScope1"))
+				.perform(get("/requestScope1"))
 				.andExpect(status().isOk())
 				.andExpect(view().name("scope/requestScope1"))
 				.andExpect(model().hasNoErrors())
