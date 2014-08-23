@@ -157,6 +157,7 @@ public class ReqControllerTest {
 				.andExpect(model().hasNoErrors());
 	}
 
+	@Test
 	public void modelRecvのPOST() throws Exception {
 		MvcResult mvcResult = mockMvc
 				.perform(
@@ -167,7 +168,11 @@ public class ReqControllerTest {
 				.andExpect(model().attributeExists("customer")).andReturn();
 
 		Map<String, Object> model = mvcResult.getModelAndView().getModel();
-		assertThat(model.get("name"), is("abc"));
-		assertThat(model.get("age"), is("20"));
+		Object customerObject = model.get("customer");
+		assertThat(customerObject, is(notNullValue()));
+		assertThat(customerObject, is(instanceOf(Customer.class)));
+		Customer customer = (Customer) customerObject;
+		assertThat(customer.getName(), is("abc"));
+		assertThat(customer.getAge(), is("20"));
 	}
 }
