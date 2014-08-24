@@ -62,7 +62,6 @@
    <artifactId>hibernate-validator</artifactId>
    <version>5.1.1.Final</version>
   </dependency>
-  <!-- AspectJ -->
   <dependency>
    <groupId>ch.qos.logback</groupId>
    <artifactId>logback-classic</artifactId>
