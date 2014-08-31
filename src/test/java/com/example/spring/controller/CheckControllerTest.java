@@ -99,4 +99,101 @@ public class CheckControllerTest {
 		DefaultMessageSourceResolvable dmr = (DefaultMessageSourceResolvable) args[0];
 		assertThat(dmr.getCode(), is("price"));
 	}
+
+	@Test
+	public void bookFormへのGET() throws Exception {
+		mockMvc.perform(get("/bookForm")).andExpect(status().isOk())
+				.andExpect(view().name("check/bookForm"))
+				.andExpect(model().hasNoErrors());
+	}
+
+	@Test
+	public void bookRecvへのPOST_NOT_NULL() throws Exception {
+		mockMvc.perform(
+				post("/bookRecv").param("name", "よくわかるSpring").param("price",
+						"1000")).andExpect(status().isOk())
+				.andExpect(view().name("check/bookRecv"))
+				.andExpect(model().hasNoErrors());
+	}
+
+	@Test
+	public void bookRecvへのPOST_nameがnull() throws Exception {
+		MvcResult mvcResult = mockMvc
+				.perform(post("/bookRecv").param("price", "1000"))
+				.andExpect(status().isOk())
+				.andExpect(view().name("check/bookForm"))
+				.andExpect(model().hasErrors())
+				.andExpect(model().errorCount(1))
+				.andExpect(model().attributeHasFieldErrors("book", "name"))
+				.andExpect(model().attributeExists("book")).andReturn();
+
+		// パラメータのチェック
+		ModelAndView mav = mvcResult.getModelAndView();
+		Map<String, Object> model = mav.getModel();
+		Object bookObject = model.get("book");
+		assertThat(bookObject, is(notNullValue()));
+		assertThat(bookObject, is(instanceOf(Book.class)));
+		Book book = (Book) bookObject;
+		assertThat(book.getName(), is(nullValue()));
+
+		// エラーメッセージのチェック
+		Object object = mav.getModel().get(
+				"org.springframework.validation.BindingResult.book");
+		assertThat(object, is(not(nullValue())));
+		assertThat(object, is(instanceOf(BindingResult.class)));
+		BindingResult bindingResult = (BindingResult) object;
+
+		checkField(bindingResult, "name", "NotNull");
+	}
+
+	@Test
+	public void bookRecvへのPOST_nameとpriceがnull() throws Exception {
+		MvcResult mvcResult = mockMvc.perform(post("/bookRecv"))
+				.andExpect(status().isOk())
+				.andExpect(view().name("check/bookForm"))
+				.andExpect(model().hasErrors())
+				.andExpect(model().errorCount(2))
+				.andExpect(model().attributeHasFieldErrors("book", "name"))
+				.andExpect(model().attributeHasFieldErrors("book", "price"))
+				.andExpect(model().attributeExists("book")).andReturn();
+
+		// パラメータのチェック
+		ModelAndView mav = mvcResult.getModelAndView();
+		Map<String, Object> model = mav.getModel();
+		Object bookObject = model.get("book");
+		assertThat(bookObject, is(notNullValue()));
+		assertThat(bookObject, is(instanceOf(Book.class)));
+		Book book = (Book) bookObject;
+		assertThat(book.getName(), is(nullValue()));
+
+		// エラーメッセージのチェック
+		Object object = mav.getModel().get(
+				"org.springframework.validation.BindingResult.book");
+		assertThat(object, is(not(nullValue())));
+		assertThat(object, is(instanceOf(BindingResult.class)));
+		BindingResult bindingResult = (BindingResult) object;
+
+		checkField(bindingResult, "name", "NotNull");
+		checkField(bindingResult, "price", "NotNull");
+	}
+
+	private void checkField(BindingResult bindingResult, String fieldName,
+			String errorCode) {
+		// エラーのあるフィールドの取得
+		List<FieldError> list = bindingResult.getFieldErrors(fieldName);
+		assertThat(list, is(not(nullValue())));
+		assertThat(list.size(), is(1));
+
+		// 詳細なエラーチェック
+		FieldError fieldError = list.get(0);
+		assertThat(fieldError.getCode(), is(errorCode));
+
+		// エラーメッセージのパラメータ
+		Object[] args = fieldError.getArguments();
+		assertThat(args.length, is(1));
+		assertThat(args[0],
+				is(instanceOf(DefaultMessageSourceResolvable.class)));
+		DefaultMessageSourceResolvable dmr = (DefaultMessageSourceResolvable) args[0];
+		assertThat(dmr.getCode(), is(fieldName));
+	}
 }

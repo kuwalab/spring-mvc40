@@ -3,15 +3,12 @@ package com.example.spring.controller;
 import javax.validation.constraints.AssertTrue;
 import javax.validation.constraints.NotNull;
 
-import org.hibernate.validator.constraints.NotBlank;
-
 public class Book {
 	private String isbn;
-	@NotBlank
+	@NotNull
 	private String name;
 	@NotNull
 	private Integer price;
-	@NotNull
 	private Integer listPrice;
 
 	public Book() {
