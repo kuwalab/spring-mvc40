@@ -1,6 +1,8 @@
 package com.example.spring.controller;
 
 import javax.validation.constraints.AssertTrue;
+import javax.validation.constraints.DecimalMax;
+import javax.validation.constraints.DecimalMin;
 import javax.validation.constraints.NotNull;
 
 public class Book {
@@ -8,6 +10,8 @@ public class Book {
 	@NotNull
 	private String name;
 	@NotNull
+	@DecimalMin("1")
+	@DecimalMax(value = "100000", inclusive = false)
 	private Integer price;
 	private Integer listPrice;
 

@@ -196,4 +196,116 @@ public class CheckControllerTest {
 		DefaultMessageSourceResolvable dmr = (DefaultMessageSourceResolvable) args[0];
 		assertThat(dmr.getCode(), is(fieldName));
 	}
+
+	@Test
+	public void bookRecvへのPOST_priceが1() throws Exception {
+		MvcResult mvcResult = mockMvc
+				.perform(
+						post("/bookRecv").param("name", "よく分かるSpring").param(
+								"price", "1")).andExpect(status().isOk())
+				.andExpect(view().name("check/bookForm"))
+				.andExpect(model().hasErrors())
+				.andExpect(model().errorCount(0))
+				.andExpect(model().attributeExists("book")).andReturn();
+
+		// パラメータのチェック
+		ModelAndView mav = mvcResult.getModelAndView();
+		Map<String, Object> model = mav.getModel();
+		Object bookObject = model.get("book");
+		assertThat(bookObject, is(notNullValue()));
+		assertThat(bookObject, is(instanceOf(Book.class)));
+		Book book = (Book) bookObject;
+		assertThat(book.getName(), is("よく分かるSpring"));
+		assertThat(book.getPrice(), is(1));
+	}
+
+	@Test
+	public void bookRecvへのPOST_priceが0() throws Exception {
+		MvcResult mvcResult = mockMvc
+				.perform(
+						post("/bookRecv").param("name", "よく分かるSpring").param(
+								"price", "0")).andExpect(status().isOk())
+				.andExpect(view().name("check/bookForm"))
+				.andExpect(model().hasErrors())
+				.andExpect(model().errorCount(1))
+				.andExpect(model().attributeHasFieldErrors("book", "price"))
+				.andExpect(model().attributeExists("book")).andReturn();
+
+		// パラメータのチェック
+		ModelAndView mav = mvcResult.getModelAndView();
+		Map<String, Object> model = mav.getModel();
+		Object bookObject = model.get("book");
+		assertThat(bookObject, is(notNullValue()));
+		assertThat(bookObject, is(instanceOf(Book.class)));
+		Book book = (Book) bookObject;
+		assertThat(book.getName(), is("よく分かるSpring"));
+		assertThat(book.getPrice(), is(0));
+
+		// エラーメッセージのチェック
+		Object object = mav.getModel().get(
+				"org.springframework.validation.BindingResult.book");
+		assertThat(object, is(not(nullValue())));
+		assertThat(object, is(instanceOf(BindingResult.class)));
+		BindingResult bindingResult = (BindingResult) object;
+
+		checkDecimalField(bindingResult, "price", "DecimalMin", true, "1");
+	}
+
+	@Test
+	public void bookRecvへのPOST_priceが100001() throws Exception {
+		MvcResult mvcResult = mockMvc
+				.perform(
+						post("/bookRecv").param("name", "よく分かるSpring").param(
+								"price", "100001")).andExpect(status().isOk())
+				.andExpect(view().name("check/bookForm"))
+				.andExpect(model().hasErrors())
+				.andExpect(model().errorCount(1))
+				.andExpect(model().attributeHasFieldErrors("book", "price"))
+				.andExpect(model().attributeExists("book")).andReturn();
+
+		// パラメータのチェック
+		ModelAndView mav = mvcResult.getModelAndView();
+		Map<String, Object> model = mav.getModel();
+		Object bookObject = model.get("book");
+		assertThat(bookObject, is(notNullValue()));
+		assertThat(bookObject, is(instanceOf(Book.class)));
+		Book book = (Book) bookObject;
+		assertThat(book.getName(), is("よく分かるSpring"));
+		assertThat(book.getPrice(), is(100001));
+
+		// エラーメッセージのチェック
+		Object object = mav.getModel().get(
+				"org.springframework.validation.BindingResult.book");
+		assertThat(object, is(not(nullValue())));
+		assertThat(object, is(instanceOf(BindingResult.class)));
+		BindingResult bindingResult = (BindingResult) object;
+
+		checkDecimalField(bindingResult, "price", "DecimalMax", true, "1");
+	}
+
+	private void checkDecimalField(BindingResult bindingResult,
+			String fieldName, String errorCode, boolean inclusive, String value) {
+		// エラーのあるフィールドの取得
+		List<FieldError> list = bindingResult.getFieldErrors(fieldName);
+		assertThat(list, is(not(nullValue())));
+		assertThat(list.size(), is(1));
+
+		// 詳細なエラーチェック
+		FieldError fieldError = list.get(0);
+		assertThat(fieldError.getCode(), is(errorCode));
+
+		// エラーメッセージのパラメータ
+		Object[] args = fieldError.getArguments();
+		assertThat(args.length, is(3));
+		assertThat(args[0],
+				is(instanceOf(DefaultMessageSourceResolvable.class)));
+		DefaultMessageSourceResolvable dmr = (DefaultMessageSourceResolvable) args[0];
+		assertThat(dmr.getCode(), is(fieldName));
+		// inclusive
+		assertThat(args[1], is(instanceOf(Boolean.class)));
+		assertThat(args[1], is(inclusive));
+		// value
+		assertThat(args[2], is(instanceOf(String.class)));
+		assertThat(args[2], is(value));
+	}
 }
