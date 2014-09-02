@@ -308,4 +308,113 @@ public class CheckControllerTest {
 		assertThat(args[2], is(instanceOf(String.class)));
 		assertThat(args[2], is(value));
 	}
+
+	@Test
+	public void bookRecvへのPOST_priceが1_MinMax() throws Exception {
+		MvcResult mvcResult = mockMvc
+				.perform(
+						post("/bookRecv").param("name", "よく分かるSpring").param(
+								"price", "1")).andExpect(status().isOk())
+				.andExpect(view().name("check/bookRecv"))
+				.andExpect(model().hasNoErrors())
+				.andExpect(model().errorCount(0))
+				.andExpect(model().attributeExists("book")).andReturn();
+
+		// パラメータのチェック
+		ModelAndView mav = mvcResult.getModelAndView();
+		Map<String, Object> model = mav.getModel();
+		Object bookObject = model.get("book");
+		assertThat(bookObject, is(notNullValue()));
+		assertThat(bookObject, is(instanceOf(Book.class)));
+		Book book = (Book) bookObject;
+		assertThat(book.getName(), is("よく分かるSpring"));
+		assertThat(book.getPrice(), is(1));
+	}
+
+	@Test
+	public void bookRecvへのPOST_priceが0_MinMax() throws Exception {
+		MvcResult mvcResult = mockMvc
+				.perform(
+						post("/bookRecv").param("name", "よく分かるSpring").param(
+								"price", "0")).andExpect(status().isOk())
+				.andExpect(view().name("check/bookForm"))
+				.andExpect(model().hasErrors())
+				.andExpect(model().errorCount(1))
+				.andExpect(model().attributeHasFieldErrors("book", "price"))
+				.andExpect(model().attributeExists("book")).andReturn();
+
+		// パラメータのチェック
+		ModelAndView mav = mvcResult.getModelAndView();
+		Map<String, Object> model = mav.getModel();
+		Object bookObject = model.get("book");
+		assertThat(bookObject, is(notNullValue()));
+		assertThat(bookObject, is(instanceOf(Book.class)));
+		Book book = (Book) bookObject;
+		assertThat(book.getName(), is("よく分かるSpring"));
+		assertThat(book.getPrice(), is(0));
+
+		// エラーメッセージのチェック
+		Object object = mav.getModel().get(
+				"org.springframework.validation.BindingResult.book");
+		assertThat(object, is(not(nullValue())));
+		assertThat(object, is(instanceOf(BindingResult.class)));
+		BindingResult bindingResult = (BindingResult) object;
+
+		checkMinMaxField(bindingResult, "price", "Min", 1L);
+	}
+
+	@Test
+	public void bookRecvへのPOST_priceが1000001_MinMax() throws Exception {
+		MvcResult mvcResult = mockMvc
+				.perform(
+						post("/bookRecv").param("name", "よく分かるSpring").param(
+								"price", "100001")).andExpect(status().isOk())
+				.andExpect(view().name("check/bookForm"))
+				.andExpect(model().hasErrors())
+				.andExpect(model().errorCount(1))
+				.andExpect(model().attributeHasFieldErrors("book", "price"))
+				.andExpect(model().attributeExists("book")).andReturn();
+
+		// パラメータのチェック
+		ModelAndView mav = mvcResult.getModelAndView();
+		Map<String, Object> model = mav.getModel();
+		Object bookObject = model.get("book");
+		assertThat(bookObject, is(notNullValue()));
+		assertThat(bookObject, is(instanceOf(Book.class)));
+		Book book = (Book) bookObject;
+		assertThat(book.getName(), is("よく分かるSpring"));
+		assertThat(book.getPrice(), is(100001));
+
+		// エラーメッセージのチェック
+		Object object = mav.getModel().get(
+				"org.springframework.validation.BindingResult.book");
+		assertThat(object, is(not(nullValue())));
+		assertThat(object, is(instanceOf(BindingResult.class)));
+		BindingResult bindingResult = (BindingResult) object;
+
+		checkMinMaxField(bindingResult, "price", "Max", 100000L);
+	}
+
+	private void checkMinMaxField(BindingResult bindingResult,
+			String fieldName, String errorCode, Long value) {
+		// エラーのあるフィールドの取得
+		List<FieldError> list = bindingResult.getFieldErrors(fieldName);
+		assertThat(list, is(not(nullValue())));
+		assertThat(list.size(), is(1));
+
+		// 詳細なエラーチェック
+		FieldError fieldError = list.get(0);
+		assertThat(fieldError.getCode(), is(errorCode));
+
+		// エラーメッセージのパラメータ
+		Object[] args = fieldError.getArguments();
+		assertThat(args.length, is(2));
+		assertThat(args[0],
+				is(instanceOf(DefaultMessageSourceResolvable.class)));
+		DefaultMessageSourceResolvable dmr = (DefaultMessageSourceResolvable) args[0];
+		assertThat(dmr.getCode(), is(fieldName));
+		// value
+		assertThat(args[1], is(instanceOf(Long.class)));
+		assertThat(args[1], is(value));
+	}
 }
