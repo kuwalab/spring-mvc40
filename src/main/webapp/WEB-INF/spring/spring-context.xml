@@ -8,7 +8,7 @@ http://www.springframework.org/schema/context
 http://www.springframework.org/schema/context/spring-context-4.0.xsd
 http://www.springframework.org/schema/mvc
 http://www.springframework.org/schema/mvc/spring-mvc-4.0.xsd">
- <mvc:annotation-driven validator="validator" />
+ <mvc:annotation-driven />
  <context:component-scan base-package="com.example.spring">
   <context:exclude-filter type="regex"
    expression="com\.example\.spring\.controller\..*Test" />
@@ -18,20 +18,4 @@ http://www.springframework.org/schema/mvc/spring-mvc-4.0.xsd">
   <property name="prefix" value="/WEB-INF/jsp/" />
   <property name="suffix" value=".jsp" />
  </bean>
- <bean id="xmlViewResolver" class="org.springframework.web.servlet.view.XmlViewResolver">
-  <property name="order" value="1" />
-  <property name="location" value="/WEB-INF/spring/views.xml" />
- </bean>
- <bean id="messageSource"
-  class="org.springframework.context.support.ReloadableResourceBundleMessageSource">
-  <property name="basename" value="classpath:/messages" />
- </bean>
- <bean id="validator"
-  class="org.springframework.validation.beanvalidation.LocalValidatorFactoryBean">
-  <property name="validationMessageSource" ref="messageSource" />
- </bean>
- <bean id="multipartResolver"
-  class="org.springframework.web.multipart.support.StandardServletMultipartResolver">
- </bean>
- <!-- <bean class="com.example.spring.GlobalExceptionResolver" /> -->
 </beans>

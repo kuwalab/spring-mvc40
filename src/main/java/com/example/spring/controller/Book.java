@@ -1,8 +1,7 @@
 package com.example.spring.controller;
 
 import javax.validation.constraints.AssertTrue;
-import javax.validation.constraints.Max;
-import javax.validation.constraints.Min;
+import javax.validation.constraints.Digits;
 import javax.validation.constraints.NotNull;
 
 public class Book {
@@ -10,10 +9,12 @@ public class Book {
 	@NotNull
 	private String name;
 	@NotNull
-	@Min(1)
-	@Max(100000)
 	private Integer price;
 	private Integer listPrice;
+
+	@NotNull
+	@Digits(integer = 3, fraction = 2)
+	private Double price2;
 
 	public Book() {
 	}
@@ -69,5 +70,13 @@ public class Book {
 
 	public void setListPrice(Integer listPrice) {
 		this.listPrice = listPrice;
+	}
+
+	public Double getPrice2() {
+		return price2;
+	}
+
+	public void setPrice2(Double price2) {
+		this.price2 = price2;
 	}
 }
