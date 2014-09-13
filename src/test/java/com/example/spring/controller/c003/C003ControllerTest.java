@@ -31,15 +31,15 @@ public class C003ControllerTest {
 
 	@Test
 	public void pathVar_12345へのGET() throws Exception {
-		mockMvc.perform(get("/c003/pathVar/12345")).andExpect(status().isOk())
-				.andExpect(view().name("req/pathVar"))
+		mockMvc.perform(get("/c003/pathVar1/12345")).andExpect(status().isOk())
+				.andExpect(view().name("c003/pathVar"))
 				.andExpect(request().attribute("var", is("12345")));
 	}
 
 	@Test
 	public void pathVar2_abcdeへのGET() throws Exception {
 		mockMvc.perform(get("/c003/pathVar2/abcde")).andExpect(status().isOk())
-				.andExpect(view().name("req/pathVar"))
+				.andExpect(view().name("c003/pathVar"))
 				.andExpect(request().attribute("var1", is("abcde")));
 	}
 }

@@ -1,4 +1,4 @@
-package com.example.spring.controller.c001;
+package com.example.spring.controller.c003;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
