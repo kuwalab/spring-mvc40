@@ -54,6 +54,7 @@ public class C025ControllerTest {
 		String fileName = "画像.png";
 		MockMultipartFile file = new MockMultipartFile("file", fileName, null,
 				fileImage);
+		// アップロードされるファイルのパス
 		Path actualFile = Paths.get(System.getProperty("java.io.tmpdir"),
 				"画像.png");
 
@@ -69,7 +70,7 @@ public class C025ControllerTest {
 				is(true));
 		byte[] actualImage = Files.readAllBytes(actualFile);
 		assertThat(actualImage, is(equalTo(fileImage)));
-		// 削除
+		// アップロードされたファイルの削除
 		Files.delete(actualFile);
 	}
 }

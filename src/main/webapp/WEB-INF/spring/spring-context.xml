@@ -21,4 +21,9 @@ http://www.springframework.org/schema/mvc/spring-mvc-4.0.xsd">
  <bean id="multipartResolver"
   class="org.springframework.web.multipart.support.StandardServletMultipartResolver">
  </bean>
+ <bean class="com.example.spring.controller.c026.GlobalExceptionResolver" />
+ <bean id="messageSource"
+  class="org.springframework.context.support.ReloadableResourceBundleMessageSource">
+  <property name="basename" value="classpath:/messages" />
+ </bean>
 </beans>
