@@ -100,7 +100,7 @@ public class C013ControllerTest {
 		MvcResult mvcResult = mockMvc
 				.perform(
 						post("/c013/bookRecv").param("name", "よく分かるSpring")
-								.param("price", "100001"))
+								.param("price", "100000"))
 				.andExpect(status().isOk())
 				.andExpect(view().name("c013/bookForm"))
 				.andExpect(model().hasErrors())
@@ -117,7 +117,7 @@ public class C013ControllerTest {
 		assertThat(c013ModelObject, is(instanceOf(C013Model.class)));
 		C013Model c013Model = (C013Model) c013ModelObject;
 		assertThat(c013Model.getName(), is("よく分かるSpring"));
-		assertThat(c013Model.getPrice(), is(100001));
+		assertThat(c013Model.getPrice(), is(100000));
 
 		// エラーメッセージのチェック
 		Object object = mav.getModel().get(
