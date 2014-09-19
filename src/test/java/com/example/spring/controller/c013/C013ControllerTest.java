@@ -147,10 +147,10 @@ public class C013ControllerTest {
 				is(instanceOf(DefaultMessageSourceResolvable.class)));
 		DefaultMessageSourceResolvable dmr = (DefaultMessageSourceResolvable) args[0];
 		assertThat(dmr.getCode(), is(fieldName));
-		// inclusive
+
 		assertThat(args[1], is(instanceOf(Boolean.class)));
 		assertThat(args[1], is(inclusive));
-		// value
+
 		assertThat(args[2], is(instanceOf(String.class)));
 		assertThat(args[2], is(value));
 	}
