@@ -96,7 +96,7 @@ public class C013ControllerTest {
 	}
 
 	@Test
-	public void bookRecvへのPOST_priceが100001() throws Exception {
+	public void bookRecvへのPOST_priceが100000() throws Exception {
 		MvcResult mvcResult = mockMvc
 				.perform(
 						post("/c013/bookRecv").param("name", "よく分かるSpring")
