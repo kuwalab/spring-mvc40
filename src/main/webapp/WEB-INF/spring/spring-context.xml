@@ -13,6 +13,10 @@ http://www.springframework.org/schema/mvc/spring-mvc-4.0.xsd">
   <context:exclude-filter type="regex"
    expression="com\.example\.spring\.controller\..*Test" />
  </context:component-scan>
+ <bean id="xmlViewResolver" class="org.springframework.web.servlet.view.XmlViewResolver">
+  <property name="order" value="1" />
+  <property name="location" value="/WEB-INF/spring/views.xml" />
+ </bean>
  <bean
   class="org.springframework.web.servlet.view.InternalResourceViewResolver">
   <property name="prefix" value="/WEB-INF/jsp/" />
