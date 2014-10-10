@@ -1,0 +1,11 @@
+<html>
+ <head>
+  <meta charset="utf-8">
+  <title>サンプル</title>
+ </head>
+ <body>
+書名: <c:out value="${requestScope.c028Model.name}" /><br>
+価格: <c:out value="${requestScope.c028Model.price}" /><br>
+<a href="requestScope2">画面遷移</a>
+ </body>
+</html>
