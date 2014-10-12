@@ -1,4 +1,4 @@
-package com.example.spring.controller;
+package com.example.spring.controller.c030;
 
 import java.io.Serializable;
 
@@ -9,7 +9,7 @@ import org.springframework.web.context.WebApplicationContext;
 
 @Component
 @Scope(value = WebApplicationContext.SCOPE_SESSION, proxyMode = ScopedProxyMode.TARGET_CLASS)
-public class SessionBook implements Serializable {
+public class C030Model implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	private String name;
