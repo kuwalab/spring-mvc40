@@ -1,4 +1,4 @@
-package com.example.spring.controller.c034;
+package com.example.spring.controller.c046;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -7,11 +7,11 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
-@RequestMapping("/c034")
-public class C034Controller {
+@RequestMapping("/c046")
+public class C046Controller {
 	@RequestMapping("/arrayForm")
 	public String entityForm() {
-		return "c034/arrayForm";
+		return "c046/arrayForm";
 	}
 
 	@RequestMapping(value = "/arrayRecv", method = RequestMethod.POST)
@@ -22,6 +22,6 @@ public class C034Controller {
 		for (int i = 0; i < name.length; i++) {
 			model.addAttribute("name" + i, name[i]);
 		}
-		return "c034/arrayRecv";
+		return "c046/arrayRecv";
 	}
 }

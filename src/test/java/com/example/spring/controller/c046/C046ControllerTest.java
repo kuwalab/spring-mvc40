@@ -1,4 +1,4 @@
-package com.example.spring.controller.c034;
+package com.example.spring.controller.c046;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
@@ -17,7 +17,7 @@ import org.springframework.web.context.WebApplicationContext;
 @RunWith(SpringJUnit4ClassRunner.class)
 @WebAppConfiguration
 @ContextConfiguration(locations = { "file:src/main/webapp/WEB-INF/spring/spring-context.xml" })
-public class C034ControllerTest {
+public class C046ControllerTest {
 	@Autowired
 	private WebApplicationContext wac;
 
@@ -30,15 +30,15 @@ public class C034ControllerTest {
 
 	@Test
 	public void arrayFormのGET() throws Exception {
-		mockMvc.perform(get("/c034/arrayForm")).andExpect(status().isOk())
-				.andExpect(view().name("c034/arrayForm"));
+		mockMvc.perform(get("/c046/arrayForm")).andExpect(status().isOk())
+				.andExpect(view().name("c046/arrayForm"));
 	}
 
 	@Test
 	public void arrayRecvのPOST_パラメータが3つ入力された場合() throws Exception {
-		mockMvc.perform(post("/c034/arrayRecv").param("name", "1", "2", "3"))
+		mockMvc.perform(post("/c046/arrayRecv").param("name", "1", "2", "3"))
 				.andExpect(status().isOk())
-				.andExpect(view().name("c034/arrayRecv"))
+				.andExpect(view().name("c046/arrayRecv"))
 				.andExpect(model().attribute("name0", "1"))
 				.andExpect(model().attribute("name1", "2"))
 				.andExpect(model().attribute("name2", "3"));
@@ -46,9 +46,9 @@ public class C034ControllerTest {
 
 	@Test
 	public void arrayRecvのPOST_パラメータが1つだけ入力された場合() throws Exception {
-		mockMvc.perform(post("/c034/arrayRecv").param("name", "", "1", ""))
+		mockMvc.perform(post("/c046/arrayRecv").param("name", "", "1", ""))
 				.andExpect(status().isOk())
-				.andExpect(view().name("c034/arrayRecv"))
+				.andExpect(view().name("c046/arrayRecv"))
 				.andExpect(model().attribute("name0", ""))
 				.andExpect(model().attribute("name1", "1"))
 				.andExpect(model().attribute("name2", ""));
