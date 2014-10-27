@@ -6,7 +6,6 @@
   <title>サンプル</title>
  </head>
  <body>
- <c:out value="${requestScope.c030Model.name}" />
 sessionScope.書名: <c:out value="${sessionScope.c030Model.name}" /><br>
 sessionScope.価格: <c:out value="${sessionScope.c030Model.price}" /><br>
 modelSessionBook.書名: <c:out value="${modelC030Model.name}" /><br>
